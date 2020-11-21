@@ -1,0 +1,110 @@
+## 프론트엔드 인강 32일차
+
+### 중첩된 속성 정의
+
+font-, marin- 등과 같이 동일한 네임 스페이스를 가지는 속성들을 다음과 같이 사용할 수 있다.
+
+- scss
+
+```
+.box {
+  font: {
+    weight: bold;
+    size: 10px;
+    family: sans-serif;
+  };
+  margin: {
+    top: 10px;
+    left: 20px;
+  };
+  padding: {
+    bottom: 40px;
+    right: 30px;
+  };
+}
+```
+
+- compiled to
+
+```css
+.box {
+  font-weight: bold;
+  font-size: 10px;
+  font-family: sans-serif;
+  margin-top: 10px;
+  margin-left: 20px;
+  padding-bottom: 40px;
+  padding-right: 30px;
+}
+```
+
+### 변수
+
+반복적으로 사용되는 값을 변수로 지정할 수 있다
+변수 이름 앞에 항상 `$`를 붙인다
+
+```
+$변수 이름: 속성값;
+```
+
+- scss
+
+```
+$color-primary: #e96900;
+$url-images: "/assets/images/";
+$w: 200px;
+
+.box {
+  width: $w;
+  margin-left: $w;
+  background: $color-primary url($url-images + "bg.jpg");
+}
+```
+
+- compiled to
+
+```css
+.box {
+  width: 200px;
+  margin-left: 200px;
+  background: #e96900 url("/assets/images/bg.jpg");
+}
+```
+
+- scss
+
+```
+.btn {
+  position: absolute;
+  &.active {
+    color: red;
+  }
+}
+
+.list {
+  li {
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+```
+
+- compiled to
+
+```css
+.btn {
+  position: absolute;
+}
+.btn.active {
+  color: red; //붙어있으면? .btn.active 동시에 가지고 있다는 의미
+}
+.list li:last-child {
+  margin-right: 0;
+}
+```
+
+![screenshot](./img/1027_1.PNG)
+![screenshot](./img/1027_2.PNG)
+![screenshot](./img/1027_3.PNG)
+[링크](https://bit.ly/3m0t8GM)
